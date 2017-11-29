@@ -50,6 +50,7 @@
     "@types/node": "^8.0.53",
     "@types/react": "^16.0.25",
     "@types/react-dom": "^16.0.3",
+    "@types/react-router-dom": "^4.2.3",
     "@types/request": "^2.0.7",
     "@types/request-promise-native": "^1.0.9",
     "babel-eslint": "^8.0.2",
