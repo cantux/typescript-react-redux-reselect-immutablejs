@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ErrorBoundary, Error } from '../common';
 import { Home } from '../Home';
 import { SimpleCounter } from '../counter/SimpleCounter';
+import ReduxCounter from '../counter/ReduxCounter';
 
 const logo = require('../../assets/images/logo.svg');
 
@@ -24,6 +25,7 @@ export default class App extends React.Component {
               <Switch>
                 <Route exact={true} path="/" component={Home}/>
                 <Route exact={true} path="/simpleCounter" component={SimpleCounter}/>
+                <Route exact={true} path="/reduxCounter" component={ReduxCounter}/>
                 <Route render={() => (<Error message="Hatalı Link!!"/>)}/>
               </Switch>
             </div>
