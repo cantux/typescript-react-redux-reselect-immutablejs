@@ -6,14 +6,15 @@ export default (state = new CounterStore({value: 0}), action: CounterAction): Co
   switch (action.type) {
     case CounterActionType.INCREMENT:
     {
-      return state.update('value', (value) => (value + 1));
+      return state.increment();
     }
     case CounterActionType.DECREMENT:
     {
-      return state--;
+      return state.decrement();
     }
 
     default:
+      console.log('default state returned: ', state.toJS());
       return state;
   }
 };

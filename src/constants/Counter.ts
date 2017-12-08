@@ -21,4 +21,12 @@ export class CounterStore extends CounterRecord implements Counter {
   constructor(props: Counter) {
     super(props);
   }
+
+  increment(): CounterStore {
+    return this.update('value', value => (value + 1)) as this;
+  }
+
+  decrement(): CounterStore {
+    return this.update('value', value => (value - 1)) as this;
+  }
 }
