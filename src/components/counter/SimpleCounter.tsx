@@ -43,11 +43,17 @@ export class SimpleCounter extends React.Component<SimpleCounterProps, SimpleCou
 
   render() {
     return (
-      <div>
-        {this.state.value}
-        <button onClick={this.increment}>+</button>
-        <button onClick={this.decrement}>-</button>
-      </div>
+      <p>
+        Clicked: {this.state.value} times
+        {' '}
+        <button onClick={this.increment}>
+          +
+        </button>
+        {' '}
+        <button onClick={this.decrement}>
+          -
+        </button>
+      </p>
     );
   }
 }

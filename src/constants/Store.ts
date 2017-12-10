@@ -1,3 +1,11 @@
+import { Map } from 'immutable';
+
 import { CounterStore } from './Counter';
 
-export type Store = {} | CounterStore;
+interface RootStore {
+  counter: CounterStore;
+}
+
+export interface Store extends Map<string, CounterStore> {
+  get<K extends keyof RootStore>(name: K): RootStore[K];
+}

@@ -10,7 +10,7 @@ export interface CounterAction extends Action {
   type: CounterActionType | null;
 }
 
-interface Counter {
+export interface Counter {
   value: number;
 }
 
@@ -18,7 +18,7 @@ const CounterRecord = Record({value: 0});
 
 export class CounterStore extends CounterRecord implements Counter {
   value: number;
-  constructor(props: Counter) {
+  constructor(props: Counter = {value: 0}) {
     super(props);
   }
 
@@ -28,5 +28,9 @@ export class CounterStore extends CounterRecord implements Counter {
 
   decrement(): CounterStore {
     return this.update('value', value => (value - 1)) as this;
+  }
+
+  get<T extends keyof Counter>(value: T): Counter[T] {
+    return super.get(value);
   }
 }

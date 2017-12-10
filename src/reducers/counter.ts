@@ -12,9 +12,7 @@ export default (state = new CounterStore({value: 0}), action: CounterAction): Co
     {
       return state.decrement();
     }
-
     default:
-      console.log('default state returned: ', state.toJS());
       return state;
   }
 };

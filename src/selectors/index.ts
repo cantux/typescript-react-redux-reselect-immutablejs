@@ -1,7 +1,12 @@
 import { createSelector } from 'reselect';
 
-import { }
+import { Store } from '../constants/Store';
 
-export default selectCounter = createSelector(
+const getCounter = (state: Store) => (state.get('counter').get('value'));
 
-)
+const selectCounter = createSelector(
+  [getCounter],
+  (bar) => bar
+);
+
+export default selectCounter;

@@ -16,7 +16,7 @@ export default class App extends React.Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Typescript React Redux</h2>
+          <h2>Typescript React Redux ImmutableJs Reselect</h2>
         </div>
 
         <ErrorBoundary>
@@ -26,7 +26,7 @@ export default class App extends React.Component {
                 <Route exact={true} path="/" component={Home}/>
                 <Route exact={true} path="/simpleCounter" component={SimpleCounter}/>
                 <Route exact={true} path="/reduxCounter" component={ReduxCounter}/>
-                <Route render={() => (<Error message="Hatalı Link!!"/>)}/>
+                <Route render={() => (<Error message="Invalid Link!!"/>)}/>
               </Switch>
             </div>
           </Router>

@@ -3,29 +3,32 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { incrementCounter, decrementCounter } from '../../actions/counter';
-import { Store } from '../../constants/Store';
+
+import selectCounter from '../../selectors';
+
 // Types
-import { CounterAction, CounterStore } from '../../constants/Counter';
+import { CounterAction } from '../../constants/Counter';
+import { Store } from '../../constants/Store';
 import { Dispatch } from 'redux';
 import { RouteComponentProps } from 'react-router';
 interface PropsFromState {
   value: number;
 }
-interface DispatchFromProps {
+interface DispatchToPropTypes {
   increment: () => void;
   decrement: () => void;
 }
 interface NavParams {}
-interface ReduxCounterProps extends RouteComponentProps<NavParams>, DispatchFromProps {
+interface ReduxCounterProps extends RouteComponentProps<NavParams>, DispatchToPropTypes {
   value: number;
 }
 // End of Types
+
 const mapStateToProps = (state: Store) => {
-  console.log('map state to props ran: ', state);
   return {
-    value: (state as CounterStore).get('value')
+    value: selectCounter(state)
   };
-}
+};
 
 const mapDispatchToProps = (dispatch: Dispatch<CounterAction>, getState?: any) => ({
   increment: () => dispatch(incrementCounter),
@@ -33,7 +36,6 @@ const mapDispatchToProps = (dispatch: Dispatch<CounterAction>, getState?: any) =
 });
 
 const ReduxCounter: React.SFC<ReduxCounterProps> = (props) => {
-  console.log('props is: ', props);
   return (
     <p>
       Clicked: {props.value} times
@@ -47,6 +49,6 @@ const ReduxCounter: React.SFC<ReduxCounterProps> = (props) => {
       </button>
     </p>
   );
-}
+};
 
-export default connect<PropsFromState, DispatchFromProps>(mapStateToProps, mapDispatchToProps)(ReduxCounter);
+export default connect<PropsFromState, DispatchToPropTypes>(mapStateToProps, mapDispatchToProps)(ReduxCounter);
