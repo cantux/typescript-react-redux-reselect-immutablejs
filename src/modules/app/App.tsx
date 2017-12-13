@@ -4,9 +4,9 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { ErrorBoundary, Error } from '../common';
-import { Home } from '../Home';
-import { SimpleCounter } from '../counter/SimpleCounter';
-import ReduxCounter from '../counter/ReduxCounter';
+import { Home } from '../home/Home';
+import { SimpleCounter } from '../simpleCounter/SimpleCounter';
+import ReduxCounter from '../counter/container/ReduxCounter';
 
 const logo = require('../../assets/images/logo.svg');
 

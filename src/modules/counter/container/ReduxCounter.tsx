@@ -2,13 +2,13 @@ import * as React from 'react';
 
 import { connect } from 'react-redux';
 
-import { incrementCounter, decrementCounter } from '../../actions/counter';
+import { incrementCounter, decrementCounter } from '../../../actions/counter';
 
-import selectCounter from '../../selectors';
+import { makeSelectCounterValue } from '../../../selectors';
 
 // Types
-import { CounterAction } from '../../constants/Counter';
-import { Store } from '../../constants/Store';
+import { CounterAction } from '../../../constants/Counter';
+import { Store } from '../../../constants/Store';
 import { Dispatch } from 'redux';
 import { RouteComponentProps } from 'react-router';
 interface PropsFromState {
@@ -26,7 +26,7 @@ interface ReduxCounterProps extends RouteComponentProps<NavParams>, DispatchToPr
 
 const mapStateToProps = (state: Store) => {
   return {
-    value: selectCounter(state)
+    value: makeSelectCounterValue()(state)
   };
 };
 
