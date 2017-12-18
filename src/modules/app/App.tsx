@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './App.css';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import { ErrorBoundary, Error } from '../common';
 import { Home } from '../home/Home';
@@ -20,7 +20,6 @@ export default class App extends React.Component {
         </div>
 
         <ErrorBoundary>
-          <Router basename={process.env.PUBLIC_URL}>
             <div className="App-intro">
               <Switch>
                 <Route exact={true} path="/" component={Home}/>
@@ -29,7 +28,6 @@ export default class App extends React.Component {
                 <Route render={() => (<Error message="Invalid Link!!"/>)}/>
               </Switch>
             </div>
-          </Router>
         </ErrorBoundary>
       </div>
     );
