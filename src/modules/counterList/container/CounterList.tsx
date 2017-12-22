@@ -15,7 +15,7 @@ interface PropsFromState {
   value: number;
 }
 interface DispatchToPropTypes {
-  increment: () => void;
+  addCounter: () => void;
   decrement: () => void;
   navigateToSimpleCounter: () => void;
 }
@@ -24,12 +24,9 @@ interface ReduxCounterProps extends DispatchToPropTypes {
 }
 // End of Types
 
-const makeMapStateToProps = () => {
-  const selectCounterValue = makeSelectCounterValue();
-  return (state: Store, props: ReduxCounterProps) => {
-    return {
-      value: selectCounterValue(state, props)
-    };
+const mapStateToProps = (state: Store) => {
+  return {
+    value: makeSelectCounterValue()(state)
   };
 };
 
@@ -39,13 +36,13 @@ const mapDispatchToProps = (dispatch: Dispatch<CounterAction>, getState?: any) =
   navigateToSimpleCounter: () => dispatch(push('simpleCounter'))
 });
 
-const ReduxCounter: React.SFC<ReduxCounterProps> = (props) => {
+const CounterList: React.SFC<ReduxCounterProps> = (props) => {
   return (
     <p>
       <button onClick={props.navigateToSimpleCounter}>Navigate To Simple Counter</button>
       Clicked: {props.value} times
       {' '}
-      <button onClick={props.increment}>
+      <button onClick={props.addCounter}>
         +
       </button>
       {' '}
@@ -56,4 +53,4 @@ const ReduxCounter: React.SFC<ReduxCounterProps> = (props) => {
   );
 };
 
-export default connect<PropsFromState, DispatchToPropTypes>(makeMapStateToProps, mapDispatchToProps)(ReduxCounter);
+export default connect<PropsFromState, DispatchToPropTypes>(mapStateToProps, mapDispatchToProps)(ReduxCounter);

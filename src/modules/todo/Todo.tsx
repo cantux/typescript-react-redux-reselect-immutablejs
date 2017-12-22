@@ -14,6 +14,9 @@ export const Todo: React.SFC<TodoProps> = (props) => {
   return (
     <p>
       TODO
+      {/*<TodoInput/>*/}
+      {/*<TodoList/>*/}
+      {/*<TodoFilter/>*/}
       {/*Clicked: {props.value} times*/}
       {/*{' '}*/}
       {/*<button onClick={props.increment}>*/}

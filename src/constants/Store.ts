@@ -1,13 +1,13 @@
 import { Map } from 'immutable';
 
-import { CounterStore } from './Counter';
+import { CounterListStore } from './CounterList';
 import { routerReducer } from 'react-router-redux';
 
 interface RootStore {
-  counter: CounterStore;
+  counterList: typeof CounterListStore;
   routing: typeof routerReducer;
 }
 
-export interface Store extends Map<string, CounterStore | typeof routerReducer> {
+export interface Store extends Map<string, typeof CounterListStore | typeof routerReducer > {
   get<K extends keyof RootStore>(name: K): RootStore[K];
 }
