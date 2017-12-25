@@ -1,56 +1,51 @@
 import * as React from 'react';
 
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 
-import { incrementCounter, decrementCounter } from '../../../actions/counter';
+import { removeCounterById, addCounter } from '../../../actions/counterList';
 
-import { makeSelectCounterValue } from '../../../selectors';
+import { counterListSelector } from '../../../selectors';
+
+import CounterComponent from '../../counter/container/ReduxCounter';
 
 // Types
-import { CounterAction } from '../../../constants/Counter';
+import { CounterListAction, CounterListStore, CounterStore } from '../../../constants/CounterList';
 import { Store } from '../../../constants/Store';
 import { Dispatch } from 'redux';
 interface PropsFromState {
-  value: number;
+  list: typeof CounterListStore;
 }
 interface DispatchToPropTypes {
   addCounter: () => void;
-  decrement: () => void;
-  navigateToSimpleCounter: () => void;
+  removeCounter: (id: number) => void;
 }
-interface ReduxCounterProps extends DispatchToPropTypes {
-  value: number;
-}
+interface CounterListProps extends DispatchToPropTypes, PropsFromState {}
 // End of Types
 
-const mapStateToProps = (state: Store) => {
+const mapStateToProps = (state: Store, props: CounterListProps) => {
   return {
-    value: makeSelectCounterValue()(state)
+    list: counterListSelector(state)
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<CounterAction>, getState?: any) => ({
-  increment: () => dispatch(incrementCounter),
-  decrement: () => dispatch(decrementCounter),
-  navigateToSimpleCounter: () => dispatch(push('simpleCounter'))
+const mapDispatchToProps = (dispatch: Dispatch<CounterListAction>, getState?: any) => ({
+  addCounter: () => dispatch(addCounter),
+  removeCounter: (id: number) => dispatch(removeCounterById(id)),
 });
 
-const CounterList: React.SFC<ReduxCounterProps> = (props) => {
+const CounterList: React.SFC<CounterListProps> = (props) => {
+  props.list.map( (val: CounterStore, key) => {
+    console.log('val: ', val)
+    console.log('key: ', key)
+    return <CounterComponent key={key}/>;
+  });
   return (
     <p>
-      <button onClick={props.navigateToSimpleCounter}>Navigate To Simple Counter</button>
-      Clicked: {props.value} times
-      {' '}
       <button onClick={props.addCounter}>
-        +
-      </button>
-      {' '}
-      <button onClick={props.decrement}>
-        -
+        Add new Counter
       </button>
     </p>
   );
 };
 
-export default connect<PropsFromState, DispatchToPropTypes>(mapStateToProps, mapDispatchToProps)(ReduxCounter);
+export default connect<PropsFromState, DispatchToPropTypes>(mapStateToProps, mapDispatchToProps)(CounterList);

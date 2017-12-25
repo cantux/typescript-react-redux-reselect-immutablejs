@@ -12,13 +12,17 @@ export interface CounterAction extends Action {
 
 export interface Counter {
   value: number;
+  id: number;
 }
 
-const CounterRecord = Record({value: 0});
+let counterId = 0;
+
+const CounterRecord = Record({value: 0, id: counterId++});
 
 export class CounterStore extends CounterRecord implements Counter {
   value: number;
-  constructor(props: Counter = {value: 0}) {
+  id: number;
+  constructor(props: Counter = {value: 0, id: counterId++}) {
     super(props);
   }
 
@@ -30,7 +34,7 @@ export class CounterStore extends CounterRecord implements Counter {
     return this.update('value', value => (value - 1)) as this;
   }
 
-  get<T extends keyof Counter>(value: T): Counter[T] {
-    return super.get(value);
+  get<T extends keyof Counter>(memberProp: T): Counter[T] {
+    return super.get(memberProp);
   }
 }

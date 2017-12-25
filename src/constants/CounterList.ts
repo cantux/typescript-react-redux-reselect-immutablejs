@@ -27,5 +27,6 @@ export interface CounterList {
 const CounterListStore = List<CounterStore>([new CounterStore()]);
 
 export {
+  CounterStore,
   CounterListStore
 };

@@ -5,31 +5,29 @@ import { push } from 'react-router-redux';
 
 import { incrementCounter, decrementCounter } from '../../../actions/counter';
 
-import { makeSelectCounterValue } from '../../../selectors';
+import { makeSelectCounter } from '../../../selectors';
 
-// Types
 import { CounterAction } from '../../../constants/Counter';
 import { Store } from '../../../constants/Store';
 import { Dispatch } from 'redux';
+
+// Types
 interface PropsFromState {
   value: number;
+  id: number;
 }
 interface DispatchToPropTypes {
   increment: () => void;
   decrement: () => void;
   navigateToSimpleCounter: () => void;
 }
-interface ReduxCounterProps extends DispatchToPropTypes {
-  value: number;
-}
+interface ReduxCounterProps extends DispatchToPropTypes, PropsFromState {}
 // End of Types
 
 const makeMapStateToProps = () => {
-  const selectCounterValue = makeSelectCounterValue();
+  const selectCounter = makeSelectCounter();
   return (state: Store, props: ReduxCounterProps) => {
-    return {
-      value: selectCounterValue(state, props)
-    };
+    return selectCounter(state, props);
   };
 };
 
@@ -56,4 +54,4 @@ const ReduxCounter: React.SFC<ReduxCounterProps> = (props) => {
   );
 };
 
-export default connect<PropsFromState, DispatchToPropTypes>(makeMapStateToProps, mapDispatchToProps)(ReduxCounter);
+export default connect<PropsFromState, DispatchToPropTypes>(makeMapStateToProps(), mapDispatchToProps)(ReduxCounter);
