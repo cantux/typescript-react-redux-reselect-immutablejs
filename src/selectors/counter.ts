@@ -7,8 +7,8 @@ import { selectCounterFromList } from './counterList';
 const selectCounter = (state: Store, props: any) => createSelector(
   [selectCounterFromList(state, props)],
   (counter) => {
-    console.log('counter: ', counter);
-    return { value: counter.get('value'), id: counter.get('id') };
+    console.log('select counter: ', counter)
+    return { value: counter.get('value'), id: counter.get('id') }
   }
 );
 const makeSelectCounter = () => (selectCounter);

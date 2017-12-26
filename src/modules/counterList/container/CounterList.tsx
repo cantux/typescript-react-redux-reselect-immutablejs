@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 import { removeCounterById, addCounter } from '../../../actions/counterList';
 
@@ -18,6 +19,7 @@ interface PropsFromState {
 interface DispatchToPropTypes {
   addCounter: () => void;
   removeCounter: (id: number) => void;
+  navigateToSimpleCounter: () => void;
 }
 interface CounterListProps extends DispatchToPropTypes, PropsFromState {}
 // End of Types
@@ -29,22 +31,26 @@ const mapStateToProps = (state: Store, props: CounterListProps) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<CounterListAction>, getState?: any) => ({
-  addCounter: () => dispatch(addCounter),
+  addCounter: () => dispatch(addCounter()),
   removeCounter: (id: number) => dispatch(removeCounterById(id)),
+  navigateToSimpleCounter: () => dispatch(push('simpleCounter'))
 });
 
 const CounterList: React.SFC<CounterListProps> = (props) => {
-  props.list.map( (val: CounterStore, key) => {
-    console.log('val: ', val)
-    console.log('key: ', key)
-    return <CounterComponent key={key}/>;
+  const counterList = props.list.map( (val: CounterStore, key) => {
+    console.log('val in list: ', val);
+    return <CounterComponent key={key} removeCounter={props.removeCounter} id={val.id}/>;
   });
   return (
-    <p>
-      <button onClick={props.addCounter}>
-        Add new Counter
-      </button>
-    </p>
+    <div>
+      <button onClick={props.navigateToSimpleCounter}>Navigate To Simple Counter</button>
+      <p>
+        <button onClick={props.addCounter}>
+          Add new Counter
+        </button>
+      </p>
+      <div>{counterList}</div>
+    </div>
   );
 };
 

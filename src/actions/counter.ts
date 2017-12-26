@@ -1,8 +1,11 @@
 import { CounterActionType, CounterAction } from '../constants/Counter';
 
-export const counterActionCreator = (type: CounterActionType): CounterAction => {
-  return { type: type };
+const counterActionCreator = (type: CounterActionType, counterId: number): CounterAction => {
+  return { type: type, payload: { id: counterId } };
 };
 
-export const incrementCounter: CounterAction = counterActionCreator(CounterActionType.INCREMENT);
-export const decrementCounter: CounterAction = counterActionCreator(CounterActionType.DECREMENT);
+export const incrementCounterActionCreator = (counterId: number): CounterAction =>
+  (counterActionCreator(CounterActionType.INC, counterId));
+
+export const decrementCounterActionCreator = (counterId: number): CounterAction =>
+  (counterActionCreator(CounterActionType.DEC, counterId));

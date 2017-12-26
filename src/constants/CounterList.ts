@@ -4,27 +4,20 @@ import { List } from 'immutable';
 import { CounterStore } from './Counter';
 
 export enum CounterListActionType {
-  'ADD_COUNTER',
-  'REMOVE_COUNTER'
+  ADD_COUNTER = 'ADDCOUNTER',
+  REMOVE_COUNTER = 'REMOVECOUNTER'
 }
 
-export interface CounterListAddAction extends Action {
+export interface CounterListAction extends Action {
   type: CounterListActionType | null;
-  payload: CounterStore;
+  payload?: number;
 }
-
-export interface CounterListRemoveAction extends Action {
-  type: CounterListActionType | null;
-  payload: number;
-}
-
-export type CounterListAction = CounterListRemoveAction | CounterListAddAction;
 
 export interface CounterList {
   list: CounterStore[];
 }
 
-const CounterListStore = List<CounterStore>([new CounterStore()]);
+const CounterListStore = List<CounterStore>();
 
 export {
   CounterStore,

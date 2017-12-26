@@ -1,9 +1,10 @@
 import * as React from 'react';
 
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 
-import { incrementCounter, decrementCounter } from '../../../actions/counter';
+import { RouteProps } from 'react-router-dom';
+
+import { incrementCounterActionCreator, decrementCounterActionCreator } from '../../../actions/counter';
 
 import { makeSelectCounter } from '../../../selectors';
 
@@ -14,44 +15,57 @@ import { Dispatch } from 'redux';
 // Types
 interface PropsFromState {
   value: number;
-  id: number;
 }
 interface DispatchToPropTypes {
-  increment: () => void;
-  decrement: () => void;
-  navigateToSimpleCounter: () => void;
+  increment: (id: number) => void;
+  decrement: (id: number) => void;
 }
-interface ReduxCounterProps extends DispatchToPropTypes, PropsFromState {}
+interface ReduxCounterProps extends DispatchToPropTypes, PropsFromState, RouteProps {
+  removeCounter?: (id: number) => void;
+  id: number;
+  value: number;
+}
 // End of Types
 
-const makeMapStateToProps = () => {
+const mapStateToProps = (state: Store, props: ReduxCounterProps) => {
   const selectCounter = makeSelectCounter();
-  return (state: Store, props: ReduxCounterProps) => {
-    return selectCounter(state, props);
+  console.log('state in mapstateToProps sleector: ', state);
+  console.log('props in mapstateToProps sleector: ', props);
+  return selectCounter(state, props);
+};
+
+const mapDispatchToProps = (dispatch: Dispatch<CounterAction>, getState?: any) => {
+  return {
+    increment: (id: number) => dispatch(incrementCounterActionCreator(id)),
+    decrement: (id: number) => dispatch(decrementCounterActionCreator(id))
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<CounterAction>, getState?: any) => ({
-  increment: () => dispatch(incrementCounter),
-  decrement: () => dispatch(decrementCounter),
-  navigateToSimpleCounter: () => dispatch(push('simpleCounter'))
-});
-
 const ReduxCounter: React.SFC<ReduxCounterProps> = (props) => {
+  const incrementHandler = () => props.increment(props.id);
+  const decrementHandler = () => props.decrement(props.id);
+  const removeCounterHandler = () => {
+    if (props.removeCounter) {
+      props.removeCounter(props.id);
+    }
+  };
   return (
     <p>
-      <button onClick={props.navigateToSimpleCounter}>Navigate To Simple Counter</button>
       Clicked: {props.value} times
       {' '}
-      <button onClick={props.increment}>
+      <button onClick={incrementHandler}>
         +
       </button>
       {' '}
-      <button onClick={props.decrement}>
+      <button onClick={decrementHandler}>
         -
+      </button>
+      {' '}
+      <button onClick={removeCounterHandler}>
+        x
       </button>
     </p>
   );
 };
 
-export default connect<PropsFromState, DispatchToPropTypes>(makeMapStateToProps(), mapDispatchToProps)(ReduxCounter);
+export default connect<PropsFromState, DispatchToPropTypes>(mapStateToProps, mapDispatchToProps)(ReduxCounter);

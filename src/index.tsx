@@ -17,7 +17,7 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 const RootReducer = combineReducers(
-  { counterList: CounterList  }
+  { counterList: CounterList }
 );
 
 // https://github.com/ReactTraining/react-router/issues/4801

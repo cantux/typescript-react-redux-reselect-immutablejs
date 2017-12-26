@@ -2,12 +2,13 @@ import { Action } from 'redux';
 import { Record } from 'immutable';
 
 export enum CounterActionType {
-  'INCREMENT',
-  'DECREMENT'
+  INC = 'INCREMENT',
+  DEC = 'DECREMENT'
 }
 
 export interface CounterAction extends Action {
-  type: CounterActionType | null;
+  type: CounterActionType;
+  payload: {id: number};
 }
 
 export interface Counter {
@@ -17,12 +18,13 @@ export interface Counter {
 
 let counterId = 0;
 
-const CounterRecord = Record({value: 0, id: counterId++});
+const CounterRecord = Record({value: 0, id: counterId});
 
 export class CounterStore extends CounterRecord implements Counter {
   value: number;
   id: number;
   constructor(props: Counter = {value: 0, id: counterId++}) {
+    console.log('counterID: ', counterId)
     super(props);
   }
 

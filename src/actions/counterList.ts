@@ -1,20 +1,11 @@
-import { CounterListActionType, CounterListAddAction, CounterListRemoveAction} from '../constants/CounterList';
-import { CounterStore } from '../constants/Counter';
+import { CounterListActionType, CounterListAction } from '../constants/CounterList';
 
-export const counterListAddActionCreator =
-  (type: CounterListActionType, payload: CounterStore): CounterListAddAction => {
-    return { type: type, payload: payload };
-};
+export const addCounter: () => CounterListAction = () => ( { type: CounterListActionType.ADD_COUNTER } );
 
 export const counterListRemoveActionCreator =
-  (type: CounterListActionType, payload: number): CounterListRemoveAction => {
+  (type: CounterListActionType, payload: number): CounterListAction => {
     return { type: type, payload: payload };
-};
-
-export const addCounter: CounterListAddAction = counterListAddActionCreator(
-  CounterListActionType.ADD_COUNTER,
-  new CounterStore()
-);
+  };
 
 export const removeCounterById = (id: number) => (
   counterListRemoveActionCreator(CounterListActionType.REMOVE_COUNTER, id)
