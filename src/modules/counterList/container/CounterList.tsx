@@ -7,7 +7,7 @@ import { removeCounterById, addCounter } from '../../../actions/counterList';
 
 import { selectCounterListFromRoot } from '../../../selectors';
 
-import CounterComponent from '../../counter/container/ReduxCounter';
+import CounterComponent from '../../counter';
 
 // Types
 import { CounterListAction, CounterListStore, CounterStore } from '../../../constants/CounterList';

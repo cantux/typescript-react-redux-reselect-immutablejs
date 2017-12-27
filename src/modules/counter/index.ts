@@ -1,3 +1,3 @@
-import ReduxCounter from './container/ReduxCounter';
+import Counter from './container/Counter';
 
-export default ReduxCounter;
+export default Counter;

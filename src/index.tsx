@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import { createStore, applyMiddleware } from 'redux';
+import { logger } from 'redux-logger';
 import { Provider } from 'react-redux';
 import { combineReducers } from 'redux-immutable';
 
@@ -24,7 +25,10 @@ const RootReducer = combineReducers(
 
 // https://github.com/ReactTraining/react-router/issues/4801
 export const history = createHistory({basename: process.env.PUBLIC_URL});
-const store = createStore(RootReducer, applyMiddleware(routerMiddleware(history)));
+const store = createStore(
+  RootReducer,
+  applyMiddleware(logger, routerMiddleware(history))
+);
 
 ReactDOM.render(
   <Provider store={store}>
