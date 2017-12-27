@@ -1,10 +1,11 @@
 import { makeSelectCounter } from './counter';
-import { selectCounterFromList, counterListSelector } from './counterList';
+import { selectCounterFromList, selectCounterListFromRoot, selectCounterFromRoot } from './counterList';
 import { selectRoutingLocation } from './routing';
 
 export {
-  counterListSelector,
+  selectCounterListFromRoot,
   selectCounterFromList,
+  selectCounterFromRoot,
   makeSelectCounter,
   selectRoutingLocation
 };

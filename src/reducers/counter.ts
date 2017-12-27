@@ -3,8 +3,6 @@ import { CounterAction, CounterActionType, CounterStore } from '../constants/Cou
 // End of types
 
 export default (state: CounterStore, action: CounterAction): CounterStore => {
-  // console.log('counter reducer action: ', action);
-  // console.log('counter reducer state: ', state);
   switch (action.type) {
     case CounterActionType.INC:
     {

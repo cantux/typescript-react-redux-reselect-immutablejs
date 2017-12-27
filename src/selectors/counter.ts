@@ -1,14 +1,13 @@
 import { createSelector } from 'reselect';
 
-import { Store } from '../constants/Store';
+import { Store } from '../constants/RootStore';
 
-import { selectCounterFromList } from './counterList';
+import { selectCounterFromRoot } from './counterList';
 
 const selectCounter = (state: Store, props: any) => createSelector(
-  [selectCounterFromList(state, props)],
+  [selectCounterFromRoot(state, props)],
   (counter) => {
-    console.log('select counter: ', counter)
-    return { value: counter.get('value'), id: counter.get('id') }
+    return { value: counter.get('value'), id: counter.get('id') };
   }
 );
 const makeSelectCounter = () => (selectCounter);

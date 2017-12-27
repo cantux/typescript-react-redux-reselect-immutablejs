@@ -8,7 +8,8 @@ import { combineReducers } from 'redux-immutable';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 
-import CounterList from './reducers/counterList';
+import RoutingReducer from './reducers/router';
+import CounterListReducer from './reducers/counterList';
 
 import App from './modules/app';
 
@@ -17,7 +18,8 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 const RootReducer = combineReducers(
-  { counterList: CounterList }
+  { counterList: CounterListReducer,
+  routing: RoutingReducer}
 );
 
 // https://github.com/ReactTraining/react-router/issues/4801

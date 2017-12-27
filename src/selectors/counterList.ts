@@ -1,36 +1,47 @@
 import { createSelector } from 'reselect';
 
-import { Store } from '../constants/Store';
+import { Store } from '../constants/RootStore';
 import { CounterListStore } from '../constants/CounterList';
 
 const getCounterListFromStore = (state: Store) => (state.get('counterList'));
 
-const counterListSelector = createSelector(
+const selectCounterListFromRoot = createSelector(
   [getCounterListFromStore],
   (counterList) => (counterList)
 );
 
-const getCounterId = (state: Store, props: any) => {
-  console.log('props in getCounterId selector: ', props);
+const getCounterIdFromRoot = (state: Store, props: any) => {
   return props.id;
 };
 
-const selectCounterFromList = (state: Store, props: any) => createSelector(
-  [counterListSelector, getCounterId],
-  (counterList: typeof CounterListStore, counterId: number) => {
-    console.log('select counter from list: whole counter list: ', counterList);
-    console.log('select counter from list: counter Id: ', counterId);
-    console.log('select counter from list: counter itself: ', counterList.get(counterId));
-    return counterList.find((item) => {
+const findCounter = (counterList: typeof CounterListStore, counterId: number) => (
+  counterList.find((item) => {
       if (item) {
         return item.get('id') === counterId;
       }
       return false;
-    });
-  }
+    }
+  )
+);
+
+const selectCounterFromRoot = (state: Store, props: any) => createSelector(
+  [selectCounterListFromRoot, getCounterIdFromRoot],
+  (counterList: typeof CounterListStore, counterId: number) => (findCounter(counterList, counterId))
+);
+
+const getCounterIdFromList = (state: typeof CounterListStore, props: any) => {
+  return props.id;
+};
+
+const getCounterList = (state: typeof CounterListStore) => (state);
+
+const selectCounterFromList = createSelector(
+  [getCounterList, getCounterIdFromList],
+  (counterList: typeof CounterListStore, counterId: number) => (findCounter(counterList, counterId))
 );
 
 export {
-  counterListSelector,
-  selectCounterFromList
+  selectCounterListFromRoot,
+  selectCounterFromList,
+  selectCounterFromRoot
 };

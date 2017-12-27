@@ -9,7 +9,7 @@ import { incrementCounterActionCreator, decrementCounterActionCreator } from '..
 import { makeSelectCounter } from '../../../selectors';
 
 import { CounterAction } from '../../../constants/Counter';
-import { Store } from '../../../constants/Store';
+import { Store } from '../../../constants/RootStore';
 import { Dispatch } from 'redux';
 
 // Types
@@ -29,8 +29,6 @@ interface ReduxCounterProps extends DispatchToPropTypes, PropsFromState, RoutePr
 
 const mapStateToProps = (state: Store, props: ReduxCounterProps) => {
   const selectCounter = makeSelectCounter();
-  console.log('state in mapstateToProps sleector: ', state);
-  console.log('props in mapstateToProps sleector: ', props);
   return selectCounter(state, props);
 };
 

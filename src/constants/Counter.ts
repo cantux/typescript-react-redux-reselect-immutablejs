@@ -24,7 +24,6 @@ export class CounterStore extends CounterRecord implements Counter {
   value: number;
   id: number;
   constructor(props: Counter = {value: 0, id: counterId++}) {
-    console.log('counterID: ', counterId)
     super(props);
   }
 
