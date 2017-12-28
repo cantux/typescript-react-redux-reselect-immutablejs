@@ -1,4 +1,14 @@
-import { CounterActionType, CounterAction } from '../constants/Counter';
+import { Action } from 'redux';
+
+export enum CounterActionType {
+  INC = 'INCREMENT',
+  DEC = 'DECREMENT'
+}
+
+export interface CounterAction extends Action {
+  type: CounterActionType;
+  payload: {id: number};
+}
 
 const counterActionCreator = (type: CounterActionType, counterId: number): CounterAction => {
   return { type: type, payload: { id: counterId } };

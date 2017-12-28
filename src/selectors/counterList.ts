@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
-import { Store } from '../constants/RootStore';
-import { CounterListStore } from '../constants/CounterList';
+import { Store } from '../reducers/RootStore';
+import { CounterListStore } from '../reducers/counterList';
 
 const getCounterListFromStore = (state: Store) => (state.get('counterList'));
 

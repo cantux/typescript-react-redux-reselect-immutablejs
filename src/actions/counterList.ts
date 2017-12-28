@@ -1,4 +1,14 @@
-import { CounterListActionType, CounterListAction } from '../constants/CounterList';
+import { Action } from 'redux';
+
+export enum CounterListActionType {
+  ADD_COUNTER = 'ADDCOUNTER',
+  REMOVE_COUNTER = 'REMOVECOUNTER'
+}
+
+export interface CounterListAction extends Action {
+  type: CounterListActionType | null;
+  payload?: number;
+}
 
 export const addCounter: () => CounterListAction = () => ( { type: CounterListActionType.ADD_COUNTER } );
 

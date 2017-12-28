@@ -1,18 +1,17 @@
 import * as React from 'react';
-
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
-import { removeCounterById, addCounter } from '../../../actions/counterList';
-
+import { removeCounterById, addCounter, CounterListAction } from '../../../actions/counterList';
+import { CounterListStore } from '../../../reducers/counterList';
+import { CounterStore } from '../../../reducers/counter';
+import { Store } from '../../../reducers/RootStore';
 import { selectCounterListFromRoot } from '../../../selectors';
 
 import CounterComponent from '../../counter';
 
 // Types
-import { CounterListAction, CounterListStore, CounterStore } from '../../../constants/CounterList';
-import { Store } from '../../../constants/RootStore';
-import { Dispatch } from 'redux';
 interface PropsFromState {
   list: typeof CounterListStore;
 }

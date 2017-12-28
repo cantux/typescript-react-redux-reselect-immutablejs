@@ -1,8 +1,15 @@
-// Types
-import { CounterListAction, CounterListActionType, CounterListStore } from '../constants/CounterList';
-import { CounterActionType, CounterAction, CounterStore } from '../constants/Counter';
-import CounterReducer from './counter';
-// End of types
+import { List } from 'immutable';
+
+import { CounterListAction, CounterListActionType } from '../actions/counterList';
+
+import { CounterAction, CounterActionType } from '../actions/counter';
+import CounterReducer, { CounterStore } from './counter';
+
+export interface CounterList {
+  list: CounterStore[];
+}
+
+export const CounterListStore = List<CounterStore>();
 
 export default (state = CounterListStore, action: CounterListAction | CounterAction) => {
   switch (action.type) {

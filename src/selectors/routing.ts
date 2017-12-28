@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { Store } from '../constants/RootStore';
+import { Store } from '../reducers/RootStore';
 
 const getRoutingLocation = (state: Store) => (state.get('routing'));
 

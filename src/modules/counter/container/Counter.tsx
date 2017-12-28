@@ -1,16 +1,11 @@
 import * as React from 'react';
-
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-
 import { RouteProps } from 'react-router-dom';
 
-import { incrementCounterActionCreator, decrementCounterActionCreator } from '../../../actions/counter';
-
+import { incrementCounterActionCreator, decrementCounterActionCreator, CounterAction } from '../../../actions/counter';
 import { selectCounter } from '../../../selectors';
-
-import { CounterAction } from '../../../constants/Counter';
-import { Store } from '../../../constants/RootStore';
-import { Dispatch } from 'redux';
+import { Store } from '../../../reducers/RootStore';
 
 // Types
 interface PropsFromState {
