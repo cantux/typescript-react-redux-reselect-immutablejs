@@ -6,7 +6,7 @@ import { RouteProps } from 'react-router-dom';
 
 import { incrementCounterActionCreator, decrementCounterActionCreator } from '../../../actions/counter';
 
-import { makeSelectCounter } from '../../../selectors';
+import { selectCounter } from '../../../selectors';
 
 import { CounterAction } from '../../../constants/Counter';
 import { Store } from '../../../constants/RootStore';
@@ -28,11 +28,11 @@ interface ReduxCounterProps extends DispatchToPropTypes, PropsFromState, RoutePr
 // End of Types
 
 const mapStateToProps = (state: Store, props: ReduxCounterProps) => {
-  const selectCounter = makeSelectCounter();
+  // const selectCounter = makeSelectCounter();
   return selectCounter(state, props);
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<CounterAction>, getState?: any) => {
+const mapDispatchToProps = (dispatch: Dispatch<CounterAction>) => {
   return {
     increment: (id: number) => dispatch(incrementCounterActionCreator(id)),
     decrement: (id: number) => dispatch(decrementCounterActionCreator(id))

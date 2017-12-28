@@ -30,7 +30,7 @@ const mapStateToProps = (state: Store, props: CounterListProps) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<CounterListAction>, getState?: any) => ({
+const mapDispatchToProps = (dispatch: Dispatch<CounterListAction>) => ({
   addCounter: () => dispatch(addCounter()),
   removeCounter: (id: number) => (dispatch(removeCounterById(id))),
   navigateToSimpleCounter: () => dispatch(push('simpleCounter'))
