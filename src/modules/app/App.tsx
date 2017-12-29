@@ -8,6 +8,8 @@ import { Home } from '../home/Home';
 import { SimpleCounter } from '../simpleCounter/SimpleCounter';
 import CounterList from '../counterList/container/CounterList';
 
+// import DevTools from '../DevTools/devTools';
+
 const logo = require('../../assets/images/logo.svg');
 
 export default class App extends React.Component {
@@ -29,6 +31,7 @@ export default class App extends React.Component {
               </Switch>
             </div>
         </ErrorBoundary>
+        {/*<DevTools/>*/}
       </div>
     );
   }

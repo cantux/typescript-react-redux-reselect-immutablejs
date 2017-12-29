@@ -14,13 +14,22 @@ import CounterListReducer from './reducers/counterList';
 
 import App from './modules/app';
 
+// import { persistState } from 'redux-devtools';
+// import DevTools from './modules/DevTools/devTools';
+// function getDebugSessionKey() {
+//   // You can write custom logic here!
+//   // By default we try to read the key from ?debug_session=<key> in the address bar
+//   const matches = window.location.href.match(/[?&]debug_session=([^&#]+)\b/);
+//   return (matches && matches.length > 0) ? matches[1] : null;
+// }
+
 import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
 
 const RootReducer = combineReducers(
   { counterList: CounterListReducer,
-  routing: RoutingReducer}
+  routing: RoutingReducer }
 );
 
 // https://github.com/ReactTraining/react-router/issues/4801
@@ -48,7 +57,16 @@ if (process.env.NODE_ENV === `development`) {
   middlewares.push(logger);
 }
 
-const store = compose(applyMiddleware(...middlewares))(createStore)(RootReducer);
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
+  RootReducer,
+  composeEnhancers(
+    applyMiddleware(...middlewares)
+    // DevTools.instrument(),
+    // persistState(getDebugSessionKey() || '')
+  )
+);
 
 ReactDOM.render(
   <Provider store={store}>
