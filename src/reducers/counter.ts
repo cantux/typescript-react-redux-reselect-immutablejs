@@ -6,10 +6,12 @@ export default (state: CounterStore, action: CounterAction): CounterStore => {
   switch (action.type) {
     case CounterActionType.INC:
     {
+      // return Object.assign({}, state, { value: state.value + 1});
       return state.increment();
     }
     case CounterActionType.DEC:
     {
+      // return Object.assign({}, state, { value: state.value - 1});
       return state.decrement();
     }
     default:
