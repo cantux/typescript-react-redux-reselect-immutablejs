@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { RouteProps } from 'react-router-dom';
 
 import { incrementCounterActionCreator, decrementCounterActionCreator, CounterAction } from '../../../actions/counter';
-import { selectCounter } from '../../../selectors';
 import { Store } from '../../../reducers/RootStore';
+import { makeSelectCounter } from '../../../selectors';
 
 // Types
 interface PropsFromState {
@@ -18,13 +18,12 @@ interface DispatchToPropTypes {
 interface ReduxCounterProps extends DispatchToPropTypes, PropsFromState, RouteProps {
   removeCounter?: (id: number) => void;
   id: number;
-  value: number;
 }
 // End of Types
 
-const mapStateToProps = (state: Store, props: ReduxCounterProps) => {
-  // const selectCounter = makeSelectCounter();
-  return selectCounter(state, props);
+const makeMapStateToProps = () => (state: Store, props: ReduxCounterProps) => {
+  const counterSelector = makeSelectCounter();
+  return counterSelector(state, props);
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<CounterAction>) => {
@@ -35,30 +34,41 @@ const mapDispatchToProps = (dispatch: Dispatch<CounterAction>) => {
 };
 
 const ReduxCounter: React.SFC<ReduxCounterProps> = (props) => {
-  const incrementHandler = () => props.increment(props.id);
-  const decrementHandler = () => props.decrement(props.id);
-  const removeCounterHandler = () => {
-    if (props.removeCounter) {
-      props.removeCounter(props.id);
-    }
-  };
+  let actionButtons;
+  if (props.hasOwnProperty('id')) {
+    const incrementHandler = () => props.increment(props.id);
+    const decrementHandler = () => props.decrement(props.id);
+    const removeCounterHandler = () => {
+      if (props.removeCounter) {
+        props.removeCounter(props.id);
+      }
+    };
+    actionButtons = (
+      <div>
+        {' '}
+        <button onClick={incrementHandler}>
+          +
+        </button>
+        {' '}
+        <button onClick={decrementHandler}>
+          -
+        </button>
+        {' '}
+        <button onClick={removeCounterHandler}>
+          x
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <p>
-      Clicked: {props.value} times
-      {' '}
-      <button onClick={incrementHandler}>
-        +
-      </button>
-      {' '}
-      <button onClick={decrementHandler}>
-        -
-      </button>
-      {' '}
-      <button onClick={removeCounterHandler}>
-        x
-      </button>
-    </p>
+    <div>
+      <p>
+        Clicked: {props.value} times
+      </p>
+      {actionButtons}
+    </div>
   );
 };
 
-export default connect<PropsFromState, DispatchToPropTypes>(mapStateToProps, mapDispatchToProps)(ReduxCounter);
+export default connect<PropsFromState, DispatchToPropTypes>(makeMapStateToProps, mapDispatchToProps)(ReduxCounter);

@@ -10,9 +10,10 @@ const selectCounterListFromRoot = createSelector(
   (counterList) => (counterList)
 );
 
-const getCounterIdFromProps = (state: Store | typeof CounterListStore, props: { id: number }) => {
-  return props.id;
-};
+const makeGetCounterIdFromProps = () => (getCounterIdFromProps);
+
+const getCounterIdFromProps = (state: Store | typeof CounterListStore, props: any) =>
+  (props.id != null ? props.id : Number(props.match.params.id));
 
 const findCounter = (counterList: typeof CounterListStore, counterId: number) => (
   counterList.find((item) => {
@@ -25,14 +26,14 @@ const findCounter = (counterList: typeof CounterListStore, counterId: number) =>
 );
 
 const selectCounterFromRoot = createSelector(
-  [selectCounterListFromRoot, getCounterIdFromProps],
+  [selectCounterListFromRoot, makeGetCounterIdFromProps()],
   (counterList: typeof CounterListStore, counterId: number) => (findCounter(counterList, counterId))
 );
 
 const getCounterList = (state: typeof CounterListStore) => (state);
 
 const selectCounterFromList = createSelector(
-  [getCounterList, getCounterIdFromProps],
+  [getCounterList, makeGetCounterIdFromProps()],
   (counterList: typeof CounterListStore, counterId: number) => (findCounter(counterList, counterId))
 );
 

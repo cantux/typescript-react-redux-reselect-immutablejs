@@ -2,11 +2,11 @@ import { createSelector } from 'reselect';
 
 import { selectCounterFromRoot } from './counterList';
 
-const selectCounter = createSelector(
+const makeSelectCounter = () => createSelector(
   [selectCounterFromRoot],
-  (counter) => ({ value: counter.get('value'), id: counter.get('id') })
+  (counter) => (counter ? { value: counter.get('value'), id: counter.get('id')} : {value: 0})
 );
 
 export {
-  selectCounter
+  makeSelectCounter
 };

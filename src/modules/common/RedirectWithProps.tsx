@@ -11,7 +11,7 @@ interface RedirectWithProps extends RouteProps {
   readonly component: React.ComponentClass<any> | React.StatelessComponent<any>;
 }
 
-export default function RedirectWithProps({component, redirectPath, ...rest}: RedirectWithProps) {
+export default function redirectWithProps({component, redirectPath, ...rest}: RedirectWithProps) {
   const Component = component;
 
   const render = (renderProps: RouteComponentProps<any>) => {

@@ -23,7 +23,7 @@ interface SimpleCounterStates {
   value: number;
 }
 
-export class SimpleCounter extends React.Component<SimpleCounterProps, SimpleCounterStates> {
+export default class SimpleCounter extends React.Component<SimpleCounterProps, SimpleCounterStates> {
   constructor (props: SimpleCounterProps) {
     super(props);
     this.state = counter(undefined, {type: null});
