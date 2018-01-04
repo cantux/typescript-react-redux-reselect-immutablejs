@@ -1,11 +1,9 @@
-import { makeSelectCounter } from './counter';
-import { selectCounterFromList, selectCounterListFromRoot, selectCounterFromRoot } from './counterList';
-import { selectRoutingLocation } from './routing';
+export { makeSelectCounter, selectCounter } from '../modules/counter/selectors/counter';
 
 export {
-  selectCounterListFromRoot,
   selectCounterFromList,
-  selectCounterFromRoot,
-  makeSelectCounter,
-  selectRoutingLocation
-};
+  selectCounterListFromRoot,
+  selectCounterFromRoot
+} from '../modules/counterList/selectors/counterList';
+
+export { selectRoutingLocation } from './routing';

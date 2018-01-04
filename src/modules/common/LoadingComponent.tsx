@@ -1,7 +1,6 @@
 import * as React from 'react';
 
-interface LoadingComponentProps {
-}
+interface LoadingComponentProps {}
 
 export const LoadingComponent: React.SFC<LoadingComponentProps> = (props: LoadingComponentProps) => {
     const svgStyle = {

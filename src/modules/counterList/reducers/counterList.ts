@@ -2,8 +2,8 @@ import { List } from 'immutable';
 
 import { CounterListAction, CounterListActionType } from '../actions/counterList';
 
-import { CounterAction, CounterActionType } from '../actions/counter';
-import CounterReducer, { CounterStore } from './counter';
+import { CounterAction, CounterActionType } from '../../counter/actions/counter';
+import CounterReducer, { CounterStore } from '../../counter/reducers/counter';
 
 export const CounterListStore = List<CounterStore>();
 

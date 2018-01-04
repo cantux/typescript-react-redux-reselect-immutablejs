@@ -10,7 +10,7 @@ import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 
 import RoutingReducer from './reducers/router';
-import CounterListReducer from './reducers/counterList';
+import CounterListReducer from './modules/counterList/reducers/counterList';
 
 import App from './modules/app';
 

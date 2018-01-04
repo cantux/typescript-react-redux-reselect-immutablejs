@@ -1,3 +1,3 @@
-import Counter from './container/Counter';
+import CounterComponent from './container/Counter';
 
-export default Counter;
+export default CounterComponent;

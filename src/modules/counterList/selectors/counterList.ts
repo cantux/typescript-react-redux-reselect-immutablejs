@@ -1,7 +1,9 @@
 import { createSelector } from 'reselect';
 
-import { Store } from '../reducers/RootStore';
+import { Store } from '../../../RootStore';
 import { CounterListStore } from '../reducers/counterList';
+
+import { CounterProps } from '../../counter/container/Counter';
 
 const getCounterListFromStore = (state: Store) => (state.get('counterList'));
 
@@ -12,8 +14,9 @@ const selectCounterListFromRoot = createSelector(
 
 const makeGetCounterIdFromProps = () => (getCounterIdFromProps);
 
-const getCounterIdFromProps = (state: Store | typeof CounterListStore, props: any) =>
-  (props.id != null ? props.id : Number(props.match.params.id));
+const getCounterIdFromProps = (state: Store | typeof CounterListStore, props: CounterProps) =>
+  (props.hasOwnProperty('id') ?
+    props.id : Number(props.match!.params.id));
 
 const findCounter = (counterList: typeof CounterListStore, counterId: number) => (
   counterList.find((item) => {

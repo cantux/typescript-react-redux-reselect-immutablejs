@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { RouteProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 
-import { incrementCounterActionCreator, decrementCounterActionCreator, CounterAction } from '../../../actions/counter';
-import { Store } from '../../../reducers/RootStore';
+import { incrementCounterActionCreator, decrementCounterActionCreator, CounterAction } from '../actions/counter';
+import { Store } from '../../../RootStore';
 import { makeSelectCounter } from '../../../selectors';
 
 // Types
@@ -15,13 +15,14 @@ interface DispatchToPropTypes {
   increment: (id: number) => void;
   decrement: (id: number) => void;
 }
-interface ReduxCounterProps extends DispatchToPropTypes, PropsFromState, RouteProps {
+export interface CounterProps
+  extends DispatchToPropTypes, PropsFromState, Partial<RouteComponentProps<{ id: number }>> {
   removeCounter?: (id: number) => void;
   id: number;
 }
 // End of Types
 
-const makeMapStateToProps = () => (state: Store, props: ReduxCounterProps) => {
+const makeMapStateToProps = () => (state: Store, props: CounterProps) => {
   const counterSelector = makeSelectCounter();
   return counterSelector(state, props);
 };
@@ -33,7 +34,7 @@ const mapDispatchToProps = (dispatch: Dispatch<CounterAction>) => {
   };
 };
 
-const ReduxCounter: React.SFC<ReduxCounterProps> = (props) => {
+const ReduxCounter: React.SFC<CounterProps> = (props) => {
   let actionButtons;
   if (props.hasOwnProperty('id')) {
     const incrementHandler = () => props.increment(props.id);
@@ -54,7 +55,7 @@ const ReduxCounter: React.SFC<ReduxCounterProps> = (props) => {
           -
         </button>
         {' '}
-        <button onClick={removeCounterHandler}>
+        <button onClick={removeCounterHandler} disabled={!props.hasOwnProperty('removeCounter')}>
           x
         </button>
       </div>

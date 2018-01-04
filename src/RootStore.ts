@@ -1,7 +1,6 @@
 import { Map } from 'immutable';
 
-import { CounterListStore } from './counterList';
-import { routerReducer } from 'react-router-redux';
+import { CounterListStore, routerReducer } from './reducers';
 
 interface RootStore {
   counterList: typeof CounterListStore;
