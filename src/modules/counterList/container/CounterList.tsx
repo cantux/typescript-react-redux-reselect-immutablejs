@@ -3,11 +3,12 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
+import { Store } from '../../../RootStore';
+
 import { removeCounterById, addCounter, CounterListAction } from '../actions/counterList';
 import { CounterListStore } from '../reducers/counterList';
 import { CounterStore } from '../../counter/reducers/counter';
-import { Store } from '../../../RootStore';
-import { selectCounterListFromRoot } from '../../../selectors';
+import { selectCounterListFromRoot } from '../selectors/counterList';
 
 import CounterComponent from '../../counter';
 
