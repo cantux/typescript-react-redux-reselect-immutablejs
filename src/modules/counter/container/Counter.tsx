@@ -3,9 +3,10 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 
-import { incrementCounterActionCreator, decrementCounterActionCreator, CounterAction } from '../actions/counter';
 import { Store } from '../../../RootStore';
-import { makeSelectCounter } from '../../../selectors';
+
+import { incrementCounterActionCreator, decrementCounterActionCreator, CounterAction } from '../actions/counter';
+import { makeSelectCounter } from '../selectors/counter';
 
 // Types
 interface PropsFromState {
