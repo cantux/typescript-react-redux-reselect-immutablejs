@@ -8,8 +8,7 @@ interface AsyncComponentStates {
   component: React.ComponentClass<any> | React.StatelessComponent<any> | null;
 }
 
-export default function asyncComponent<P>(importComponent:
-  Promise<any> ) {
+export default function asyncComponent<P>(importComponent: Promise<any> ) {
   class AsyncComponent extends React.Component<P, AsyncComponentStates> {
 
     componentDidMount() {
